@@ -9,7 +9,7 @@ public class FlockManager : MonoBehaviour
     public int BoidCount = 20;
     public Vector3 Limits = new Vector3(5, 5, 5);
 
-    
+
     [HideInInspector]
     public GameObject[] boids;
 
@@ -33,14 +33,14 @@ public class FlockManager : MonoBehaviour
     void Start()
     {
         boids = new GameObject[BoidCount];
-        for(int i = 0; i < BoidCount; i++)
+        for (int i = 0; i < BoidCount; i++)
         {
             float x = Random.Range(-Limits.x, Limits.x);
             float y = Random.Range(-Limits.y, Limits.y);
             float z = Random.Range(-Limits.z, Limits.z);
             Vector3 pos = this.transform.position + new Vector3(x, y, z);
 
-            boids[i] = Instantiate(BoidPrefab,pos, Quaternion.identity);
+            boids[i] = Instantiate(BoidPrefab, pos, Quaternion.identity);
 
 
             boids[i].GetComponent<Boid>().Manager = this;
@@ -53,7 +53,7 @@ public class FlockManager : MonoBehaviour
     {
         //GoalPos = this.transform.position; //step 5
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             float x = Random.Range(-Limits.x, Limits.x);
             float y = Random.Range(-Limits.y, Limits.y);
