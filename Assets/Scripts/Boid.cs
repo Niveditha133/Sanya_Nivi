@@ -9,6 +9,9 @@ public class Boid : MonoBehaviour
     private float Speed;
     private bool turning = false;
 
+    public GameObject[] Goals; //-----
+    private int i; //------
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -105,5 +108,17 @@ public class Boid : MonoBehaviour
             }
         }
         transform.Translate(0, 0, Time.deltaTime * Speed);
+        GoalChange();  //------
+
+
+    }
+    private void GoalChange()  //------
+
+    {
+        //i = Random.Range(0, Goals.Length);        
+        Goals = GameObject.FindGameObjectsWithTag("Goal");
+        //Debug.Log("Target Reached");
+        this.transform.position = Goals[i].transform.position;
+        Debug.DrawRay(this.transform.position, Goals[i].transform.position, Color.green);
     }
 }

@@ -8,10 +8,11 @@ public class FlockManager : MonoBehaviour
     public GameObject BoidPrefab;
     public int BoidCount = 20;
     public Vector3 Limits = new Vector3(5, 5, 5);
-
+   
 
     [HideInInspector]
     public GameObject[] boids;
+   
 
     [Header("Boid Settings")]
     [Range(0.0f, 5.0f)]
@@ -64,6 +65,14 @@ public class FlockManager : MonoBehaviour
         for (int i = 0; i < BoidCount; i++)
         {
             boids[i].GetComponent<Boid>().BoidUpdate();
+            
         }
+
+        //for (test i = 0; i = 50; i++)
+        /*if (int i = 0, i++ == GoalPos == )
+        {
+            GoalChange();
+        }*/
     }
+    
 }
