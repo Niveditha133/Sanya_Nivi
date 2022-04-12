@@ -26,12 +26,12 @@ public class Boid : MonoBehaviour
         Bounds b = new Bounds(Manager.transform.position, Manager.Limits * 2);
         RaycastHit hit;
         Vector3 direction = Manager.transform.position - transform.position; //this value doesn't matter now
-        Debug.DrawRay(this.transform.position, this.transform.forward, Color.red);
+        Debug.DrawRay(this.transform.position, this.transform.forward*5, Color.red);
         if (!b.Contains(this.transform.position))
         {
             turning = true;
         }
-        else if (Physics.Raycast(this.transform.position, this.transform.forward, out hit))
+        else if (Physics.Raycast(this.transform.position, this.transform.forward * 5, out hit))
         {
             turning = true;
             direction = Vector3.Reflect(this.transform.forward, hit.normal);
@@ -41,6 +41,7 @@ public class Boid : MonoBehaviour
             turning = false;
         }
 
+        //*/
         //if turing is true
         if (turning)
         {
@@ -50,7 +51,9 @@ public class Boid : MonoBehaviour
             transform.Translate(0, 0, Time.deltaTime * Speed);
             return; //exit, end function
         }
+        //*/
 
+        /*/
         //random speed/behaviour
         if (Random.Range(0, 100) < 10) //ten percent chance the speed will change
         {
@@ -62,7 +65,7 @@ public class Boid : MonoBehaviour
             transform.Translate(0, 0, Time.deltaTime * Speed);
             return; //exit, end function
         }
-
+        //*/
 
         GameObject[] boids = Manager.boids;
 
@@ -108,13 +111,17 @@ public class Boid : MonoBehaviour
             }
         }
         transform.Translate(0, 0, Time.deltaTime * Speed);
-        GoalChange();  //------
-
-
+        time += Time.deltaTime;
+        if(time < 5) { return; }
+        //GoalChange();  //-----
+        time = 0;
     }
-    private void GoalChange()  //------
 
+    private float time = 0;
+
+    private void GoalChange()  //------
     {
+        Debug.Log("Change");
         //i = Random.Range(0, Goals.Length);        
         Goals = GameObject.FindGameObjectsWithTag("Goal");
         //Debug.Log("Target Reached");

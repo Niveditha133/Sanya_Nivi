@@ -41,13 +41,13 @@ public class FlockManager : MonoBehaviour
             float z = Random.Range(-Limits.z, Limits.z);
             Vector3 pos = this.transform.position + new Vector3(x, y, z);
 
-            boids[i] = Instantiate(BoidPrefab, pos, Quaternion.identity);
+            boids[i] = Instantiate(BoidPrefab, pos, Quaternion.identity); //adding boids to the scene
 
 
             boids[i].GetComponent<Boid>().Manager = this;
         }
 
-        GoalPos = this.transform.position; //step 5
+        GoalPos = this.transform.position; //step 5 //right now here this hold the position of the boids
     }
 
     private void Update()
@@ -73,6 +73,22 @@ public class FlockManager : MonoBehaviour
         {
             GoalChange();
         }*/
+        time += Time.deltaTime;
+        if (time < 5) { return; }
+        GoalChange();  //-----
+        time = 0;
     }
-    
+
+    private float time = 0;
+
+    private void GoalChange()  //------
+
+    {
+        Debug.Log("Change");
+        //i = Random.Range(0, Goals.Length);        
+        GameObject[] Goals = GameObject.FindGameObjectsWithTag("Goal");
+        //Debug.Log("Target Reached");
+        GoalPos = Goals[Random.Range(0,Goals.Length)].transform.position;
+        //Debug.DrawRay(this.transform.position, Goals[i].transform.position, Color.green);
+    }
 }
